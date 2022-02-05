@@ -12,8 +12,8 @@ const storage = multer.diskStorage({
     cb(null, '../public/assets')
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, `${uniqueSuffix}-${file.originalname}`)
+    const uniqueSuffix = Date.now()
+    cb(null, `${uniqueSuffix}${file.originalname}`)
   }
 })
 
@@ -46,15 +46,22 @@ router.patch('/edit/user/:userId',upload.array("images", 12),async(req,res,next)
 		const result = await User.findByIdAndUpdate(req.params.userId,req.body);
 		if(req.files.length){
 			const userImage = await UserImage.findOne({userId:req.params.userId})
+			if(userImage===null){
+				const userImage = new UserImage({
+					userId:result._id,
+					images:req.files.map(image=>({name:image.filename}))
+				});
+				await userImage.save();
+			}
 			for(let i=0;i<userImage.images.length;i++){
 	          fs.unlinkSync(path.join("../public/assets", userImage.images[i].name), (err) => {
-	            if (err) throw err;
+	            console.log(err)
 	          });
 			}
 			const imageResult = await UserImage.findByIdAndUpdate(userImage._id,{
 				userId:result._id,
 				images:req.files.map(image=>({name:image.filename}))
-			})
+			})			
 		}
 		res.status(200).send({
 			status:'success',
