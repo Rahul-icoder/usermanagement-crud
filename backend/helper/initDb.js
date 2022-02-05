@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 mongoose
-  .connect(process.env.MONGO_URI, {
-    dbName: process.env.DB_NAME,
+  .connect("mongodb://localhost:27017", {
+    dbName: "crudUser",
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })

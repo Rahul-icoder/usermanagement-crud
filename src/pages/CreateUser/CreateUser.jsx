@@ -37,7 +37,7 @@ const CreateUser = () => {
 	}
 	return (
 		<container style={{display:"flex",justifyContent:'center'}}>
-			<Box w='50%' p={10} borderWidth='1px' borderRadius='lg' mt="10">
+			<Box w='50%' bg='white' p={10} borderWidth='1px' borderRadius='lg' mt="10">
 				<h1 align="center" style={{fontWeight:600}}>ADD USER</h1>
 				<form className="form-container" style={{marginTop:'1.5rem'}} onSubmit={onSubmit}  encType="multipart/form-data">
 				  <Input type="text" placeholder='First Name' name="firstName" size='md' onChange={handleChange}  />
@@ -54,7 +54,7 @@ const CreateUser = () => {
 				   colorScheme='blue'
 				   spinnerPlacement='start'
 				   >
-				   	Submit
+				   	SUBMIT
 				   </Button>
 				 </form>
 			</Box>

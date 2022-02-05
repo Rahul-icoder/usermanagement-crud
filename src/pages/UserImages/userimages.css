@@ -1,0 +1,13 @@
+.userimage-container{
+	margin-top: 2rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+	gap: 0.3rem;
+	justify-items: center;
+}
+
+.userimage-container img{
+	height: 140px;
+	background-size: cover;
+	border: 2px solid gray;
+}
